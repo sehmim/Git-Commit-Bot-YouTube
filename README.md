@@ -1,4 +1,4 @@
-# Git Commit Bot Youtube
+# Git Commit Bot YouTube
 
 Given a repo, this bot commits random stuff to a readme file so you can get a commit everyday and get that green check box ✅ 🤖
 
