@@ -39,7 +39,7 @@ const puppet = async (username, password, code, commitMessage) => {
 }   
 
 // Running Everyday at midnight
-cron.schedule('0 0 * * *', () => {
+cron.schedule('0 15 * * *', () => {
     console.log('------------RUNNING JOB--------------');
     puppet(process.env.USERNAME, process.env.PASSWORD, process.env.CODE_CHANGE + " -> " +new Date().getTime() + "\n", process.env.COMMIT_MESSAGE).then(() => {
         console.log("Commit Success")
