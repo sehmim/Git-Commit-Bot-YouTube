@@ -4,14 +4,6 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const URL = "https://github.com/login"
-const REPO = "https://github.com/batman500/dummy"
-
-const USERNAME = "batman500"
-const PASSWORD = "JokerSucks500"
-
-const CODE_CHANGE = "Commit Change"
-const COMMIT_MESSAGE = "Commit Message"
-
 
 let browser
 let page
@@ -30,7 +22,7 @@ const puppet = async (username, password, code, commitMessage) => {
     await page.waitFor(500)
 
     // Go to repo
-    await page.goto(REPO, { waitUntil: 'networkidle2' }, { delay: 500 })
+    await page.goto(process.env.REPO, { waitUntil: 'networkidle2' }, { delay: 500 })
     await page.click("a[class='Box-btn-octicon btn-octicon float-right']", { delay: 200 })
 
     // Write Change
@@ -47,10 +39,10 @@ const puppet = async (username, password, code, commitMessage) => {
 }   
 
 // Running Everyday at midnight
-cron.schedule('0 0 0 * * *', () => {
+cron.schedule('0 0 * * *', () => {
     console.log('------------RUNNING JOB--------------');
-    puppet(process.env.USERNAME, process.env.PASSWORD, process.env.CODE_CHANGE, process.env.COMMIT_MESSAGE).then(() => {
-        console.log("Message committed")
+    puppet(process.env.USERNAME, process.env.PASSWORD, process.env.CODE_CHANGE + " -> " +new Date().getTime() + "\n", process.env.COMMIT_MESSAGE).then(() => {
+        console.log("Commit Success")
     }).catch(err => console.log(err))
   });
 
